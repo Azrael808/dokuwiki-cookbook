@@ -22,7 +22,11 @@
 package 'php5-fpm'
 
 # Install and configure nginx
-include_recipe 'nginx'
+%w{ apt
+    nginx }.each do |r|
+
+  include_recipe r
+end
 
 template "#{node['nginx']['dir']}/sites-available/dokuwiki" do
   source 'dokuwiki-nginx.erb'
